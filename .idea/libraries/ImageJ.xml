@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="ImageJ">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/ImageJ" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/ImageJ/macros/Examples/Java" />
+      <root url="file://$PROJECT_DIR$/ImageJ/plugins" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/ImageJ" recursive="false" />
+  </library>
+</component>
