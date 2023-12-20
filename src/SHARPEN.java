@@ -9,30 +9,43 @@ import static java.lang.Math.round;
 
 public class SHARPEN {
     public static void main(String[] args) {
-        try {
-            Files.createDirectories(Paths.get("src/SHARPENresults"));
-            File currentDirectory = new File("src/SHARPENresults/");
-            for (File subfile : currentDirectory.listFiles()) {
-                if (!subfile.isDirectory()) {
-                    subfile.delete();
+        String[] imagePaths = {
+                "src/aabdom.jpg",   // https://medpix.nlm.nih.gov/case?id=c0a43269-30d7-4afd-8cde-d0028bd5ce04
+                "src/ahip.jpg",    // https://medpix.nlm.nih.gov/case?id=dcdd0d66-67c9-4236-80e7-77fae4cb2257
+                "src/ateeth.jpg"  //https://medpix.nlm.nih.gov/case?id=829f7a67-0aad-417f-8d90-daba4af2096b
+        };
+        for(String Image : imagePaths){
+            try {
+                String imagePathShort = extractFileName(Image);
+                String pathText = "src" + File.separator + imagePathShort + "_SHARPEN_results";
+                Files.createDirectories(Paths.get(pathText));
+                File currentDirectory = new File(pathText);
+                for (File subfile : currentDirectory.listFiles()) {
+                    if (!subfile.isDirectory()) {
+                        subfile.delete();
+                    }
                 }
+
+                BufferedImage originalImage = ImageIO.read(new File(Image));
+                for (double i = 0.5; i < 4; i += 0.5) {
+                    double sharpeningIntensity = (double)round(i*100)/100;
+                    System.out.println("loading image \"" + imagePathShort + "\" with gamma value " + sharpeningIntensity + "...");
+                    BufferedImage sharpenedImage = sharpenImage(originalImage, sharpeningIntensity);
+                    ImageIO.write(sharpenedImage, "png", new File("src" + File.separator + imagePathShort + "_SHARPEN_results" + File.separator + imagePathShort + "_result_" + sharpeningIntensity + ".png"));
+                }
+
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            BufferedImage originalImage = ImageIO.read(new File("src/synpic33197.jpg"));
-
-
-            for (double i = 0.5; i < 4; i += 0.5) {
-                double sharpeningIntensity = (double)round(i*100)/100;
-                System.out.println(sharpeningIntensity);
-                BufferedImage sharpenedImage = sharpenImage(originalImage, sharpeningIntensity);
-                ImageIO.write(sharpenedImage, "png", new File("src/SHARPENresults/sharpened_image" + sharpeningIntensity + ".png"));
-            }
-
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+    }
+
+    private static String extractFileName(String filePath) {
+        int lastSeparatorIndex = filePath.lastIndexOf("/");
+        int dotIndex = filePath.indexOf('.', lastSeparatorIndex + 1);
+        return filePath.substring(lastSeparatorIndex + 1, dotIndex);
     }
 
     private static BufferedImage sharpenImage(BufferedImage image, double intensity) {
@@ -41,7 +54,6 @@ public class SHARPEN {
 
         BufferedImage sharpenedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-        // Define a sharpening kernel based on the intensity
         double[] sharpeningKernel = {
                 -intensity, -intensity, -intensity,
                 -intensity,  1 + 8 * intensity, -intensity,
