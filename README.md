@@ -10,11 +10,19 @@ The results are a certain number of png files, named accordingly with the modifi
 
 **Presentation:**
 
-![ateeth_result_1 4](https://github.com/user-attachments/assets/aaabf67e-aa93-4d8c-8ef3-ecbbc0267274)
-![ateeth_result_1 1](https://github.com/user-attachments/assets/b210f14a-2075-4a12-b6a9-19e628bcee23)
-![ateeth_result_0 8](https://github.com/user-attachments/assets/2176c853-8afd-479a-b2f7-4116d98c836d)
-![ateeth_result_0 5](https://github.com/user-attachments/assets/4718f2c0-3b26-4181-9005-3be7a015ac64)
-![ateeth_result_0 2](https://github.com/user-attachments/assets/20688cb6-6318-44e2-9ba5-44c47be76891)
+Picture modification is widely used in medicine, this example will be making the picture easier to read.
+Here is the comparison of abdomen images with different gamma levels:
+
+![abdomen_gamma](https://github.com/user-attachments/assets/6d19c2f2-b910-403d-b4f1-0fe0448df904)
+
+Next picture will be the sharpening effect used on human teeth:
+
+![teeth_sharpen](https://github.com/user-attachments/assets/c470553a-19f1-4f39-82a5-df3a9b4da294)
+
+Again gamma correction, but this time different image, where we can se how different an image may look based on the technology used to take the image:
+
+![hip_gamma](https://github.com/user-attachments/assets/9e2e5324-75ce-490c-8221-92301d1ef082)
+
 
 **Usage:**
 
